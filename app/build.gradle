@@ -17,6 +17,7 @@ repositories {
     mavenLocal()
     maven {
         url "https://oss.sonatype.org/content/repositories/snapshots/"
+
     }
 }
 apt {
@@ -71,5 +72,4 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:23.0.0'
     compile 'com.android.support:cardview-v7:23.0.0'
     compile 'com.android.support:design:23.0.0'
-
 }
