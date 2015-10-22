@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="asiantech.quocnp.manager_battery" >
 
+
     <application
         android:name=".App_"
         android:allowBackup="true"
