@@ -13,6 +13,7 @@ import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
@@ -22,6 +23,12 @@ import asiantech.quocnp.manager_battery.R;
 
 @EActivity(R.layout.activity_home_manager_battery)
 public class HomeManagerBatteryActivity extends BaseActivity {
+    //======================Test Demo===========================================
+    @Click(R.id.demo)
+    void doClickDemo(){
+        BatteryStatusActivity_.intent(HomeManagerBatteryActivity.this).start();
+    }
+    //=================================end==========================================
     @ViewById(R.id.tvStatus)
     TextView mTvStatus;
     @ViewById(R.id.progressBarStatus)
@@ -33,15 +40,15 @@ public class HomeManagerBatteryActivity extends BaseActivity {
         public void onReceive(Context context, Intent intent) {
             boolean isPresent = intent.getBooleanExtra("present", false);
             String technology = intent.getStringExtra("technology");
-            int icon = intent.getIntExtra("iconSmall", 0);
+            int icon = intent.getIntExtra("iconSmall", -1);
             int plugged = intent.getIntExtra("plugged", -1);
             int scale = intent.getIntExtra("scale", -1);
-            int health = intent.getIntExtra("health", 0);
+            int health = intent.getIntExtra("health", -1);
             int status = intent.getIntExtra("status", 0);
             int rawlevel = intent.getIntExtra("level", -1);
-            int voltage = intent.getIntExtra("voltage", 0);
-            int temperature = intent.getIntExtra("temperature", 0);
-            int property = intent.getIntExtra("property",0);
+            int voltage = intent.getIntExtra("voltage", -1);
+            int temperature = intent.getIntExtra("temperature", -1);
+            int property = intent.getIntExtra("property",-1);
             int level = 0;
             Bundle bundle = intent.getExtras();
             Log.i("BatteryLevel", bundle.toString());
@@ -56,7 +63,7 @@ public class HomeManagerBatteryActivity extends BaseActivity {
                 info += ("Health: " + getHealthString(health) + "\n");
                 info += ("Status: " + getStatusString(status) + "\n");
                 info += ("Voltage: " + voltage / 1000.0f + "V" + "\n");
-                info += ("Temperature: " + (temperature - 273) + Character.toString((char) 176) + "C" + "\n");
+                info += ("Temperature: " + temperature/10.0f + Character.toString((char) 176) + "C" + "\n");
                 info += ("property:" + getPropertyString(property) +"\n");
                 setBatteryLevelText(info + "\n\n" + bundle.toString());
             } else {
@@ -92,6 +99,7 @@ public class HomeManagerBatteryActivity extends BaseActivity {
     void afterView() {
         initEvent();
         registerBatteryLevelReceiver();
+
     }
 
     @Override
@@ -198,7 +206,7 @@ public class HomeManagerBatteryActivity extends BaseActivity {
      * @return
      */
     private String getPropertyString(int property) {
-        String propertyString;
+       String propertyString;
         switch (property) {
             case BatteryManager.BATTERY_PROPERTY_CAPACITY:
                 propertyString = "Capacity";

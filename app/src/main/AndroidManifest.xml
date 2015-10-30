@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="asiantech.quocnp.manager_battery" >
 
-
     <application
         android:name=".App_"
         android:allowBackup="true"
@@ -12,9 +11,9 @@
         android:theme="@style/MyTheme"
         tools:ignore="AllowBackup" >
         <activity
-            android:name=".activity.SplashActivity_"
-            android:noHistory="true"
-            android:label="@string/app_name">
+            android:name=".activity.BatteryStatusActivity_"
+            android:label="@string/app_name"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,7 +22,23 @@
         </activity>
         <activity
             android:name=".activity.HomeManagerBatteryActivity_"
-            android:noHistory="true">
+            android:noHistory="true" >
+        </activity>
+
+        <service android:name=".services.BatteryServices" />
+
+        <!--
+        <activity
+            android:name=".activity.BatteryStatusActivity_"
+            android:noHistory="true"
+            android:label="@string/title_activity_battery_status"
+            android:theme="@style/MyTheme" >
+        </activity>
+        -->
+        <activity
+            android:name=".activity.DemoActivity_"
+            android:label="@string/title_activity_demo"
+            android:theme="@style/MyTheme" >
         </activity>
     </application>
 
